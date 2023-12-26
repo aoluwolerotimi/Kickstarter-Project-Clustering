@@ -1,5 +1,5 @@
 
-# Identifying Project Profiles through Clustering
+# Identifying Fundraising Project Profiles through Clustering
 
 In this descriptive analytics project, I've leveraged kprototypes - an algorithm that incorporates both numerical and cateogrical data - to form clusters representing different profiles of projects. 
 
