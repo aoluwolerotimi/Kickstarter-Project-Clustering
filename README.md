@@ -52,6 +52,21 @@ Cluster 2, representing about 26% of the data, was balanced across categories wi
 Cluster 4, holding about 30% of the projects, was similar to Cluster 2 but with higher funding targets and more spotlighted and successful projects, positioning it as a kind of “Every Man+” cluster
 
 
+## Appendix
+
+#### Elbow Plot
+
+![Elbow Plot](https://github.com/aoluwolerotimi/Kickstarter-Project-Clustering/blob/main/Elbow%20Plot.png)
+
+
+#### Numeric Centroids
+![Numeric Centroids](https://github.com/aoluwolerotimi/Kickstarter-Project-Clustering/blob/main/Numeric%20Centroids.png)
+
+
+#### Categorical Frequency Counts
+![Categorical Frequency Counts](https://github.com/aoluwolerotimi/Kickstarter-Project-Clustering/blob/main/Categorical%20Frequency%20Counts.png)
+
+
 
 
 
