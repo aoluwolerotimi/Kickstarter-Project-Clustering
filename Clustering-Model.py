@@ -10,7 +10,7 @@ from sklearn.preprocessing import StandardScaler
 ### PREPROCESSING FULL DATASET ###
 
 # Importing the dataset
-dataset = pd.read_excel('/Users/aoluwolerotimi/Datasets/Kickstarter.xlsx') # Change this to your local path
+dataset = pd.read_excel('Kickstarter.xlsx') # Change this to your local path
 df = dataset.copy()
 
 # Do not consider projects in interim state
