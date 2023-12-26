@@ -3,6 +3,7 @@
 
 In this descriptive analytics project, I've leveraged kprototypes - an algorithm that incorporates both numerical and cateogrical data - to form clusters representing different profiles of projects. 
 
+_Note: This project can be run with just the Clustering-Model.py file and the Kickstarter.xlsx file specified via the path therein._
 
 ## Context
 [Kickstarter](https://www.kickstarter.com/about) is a crowdfunding platform with a focus on bringing creative projects to life.
