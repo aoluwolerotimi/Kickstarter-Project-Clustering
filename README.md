@@ -8,7 +8,7 @@ _Note: This project can be run with just the Clustering-Model.py file and the Ki
 ## Context
 [Kickstarter](https://www.kickstarter.com/about) is a crowdfunding platform with a focus on bringing creative projects to life.
 
-As part of a data mining course, I was tasked with defining meaningful profiles from a dataset of over 15,000 projects from 2009 and 2016. Jump to the last section of this ReadMe to check out the data dictionary. 
+As part of a data mining course, I was tasked with defining meaningful profiles from a dataset of over 15,000 projects from 2009 and 2016.
 
 
 ## Process
