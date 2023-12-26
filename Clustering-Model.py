@@ -134,7 +134,8 @@ f_std = pd.merge(f_num_std_df, f_categorical, left_index=True, right_index=True)
 
 ### BUILDING THE MODEL ###
 
-# # Uncomment for hyperparemeter tuning for optimal number of clusters
+# # Uncomment for hyperparemeter tuning for optimal number of clusters. 
+# # A similar process can be used for optimal gamma, though default gamma value was used in this model
 # costs = []
 # for i in range(4,11):
 #     kmixed = KPrototypes(n_clusters=i, random_state = 0)
