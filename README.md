@@ -56,15 +56,15 @@ Cluster 4, holding about 30% of the projects, was similar to Cluster 2 but with 
 
 #### Elbow Plot
 
-![Elbow Plot](https://github.com/aoluwolerotimi/Kickstarter-Project-Clustering/blob/main/Elbow%20Plot.png)
+![Elbow Plot](https://github.com/aoluwolerotimi/Kickstarter-Project-Clustering/blob/main/Images/Elbow%20Plot.png)
 
 
 #### Numeric Centroids
-![Numeric Centroids](https://github.com/aoluwolerotimi/Kickstarter-Project-Clustering/blob/main/Numeric%20Centroids.png)
+![Numeric Centroids](https://github.com/aoluwolerotimi/Kickstarter-Project-Clustering/blob/main/Images/Numeric%20Centroids.png)
 
 
 #### Categorical Frequency Counts
-![Categorical Frequency Counts](https://github.com/aoluwolerotimi/Kickstarter-Project-Clustering/blob/main/Categorical%20Frequency%20Counts.png)
+![Categorical Frequency Counts](https://github.com/aoluwolerotimi/Kickstarter-Project-Clustering/blob/main/Images/Categorical%20Frequency%20Counts.png)
 
 
 
