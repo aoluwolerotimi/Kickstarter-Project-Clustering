@@ -12,7 +12,7 @@ As part of a data mining course, I was tasked with defining meaningful profiles 
 
 
 ## Process
-At a high level, these are the steps I took in developing this model. This repo currently has the code for my final model. I hope to upload some of the code from the journey there once it's cleaned up. 
+At a high level, these are the steps I took in developing this model. This repo currently has the code for my final model. I hope to upload some of the behind-the-scenes code while developing that model once I've gotten that cleaned up. 
 
 #### Model Selection
 Noting that much of my dataset was comprised of categorical features as well as the fact that many of the characterstics that would be useful in a product strategy context were categorical - I took this as an opportunity to try the versalite kprototypes algorithm
