@@ -15,10 +15,10 @@ As part of a data mining course, I was tasked with defining meaningful profiles 
 At a high level, these are the steps I took in developing this model. This repo currently has the code for my final model. I hope to upload some of the behind-the-scenes code while developing that model once I've gotten that cleaned up. 
 
 #### Model Selection
-Noting that much of my dataset was comprised of categorical features as well as the fact that many of the characterstics that would be useful in a product strategy context were categorical - I took this as an opportunity to try the versalite kprototypes algorithm
+Noting that much of my dataset was comprised of categorical features as well as the fact that many of the characteristics that would be useful in a product strategy context were categorical - I took this as an opportunity to try the versatile kprototypes algorithm
 
 #### Preprocessing
-* Manually selected a subset of variables based on my assesmment of their potential in defining meaningful clusters
+* Manually selected a subset of variables based on my assessment of their potential in defining meaningful clusters
 * Excluded records which had outliers in terms of their fundraising goals
 * Binned categorical variables with a high number of unique values based on domain knowledge and/or frequencies observed during EDA
 * Standardized numerical variables
