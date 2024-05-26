@@ -1,4 +1,4 @@
 
-rough notes.txt
+*.txt
 __pycache__/
-
+*.html
