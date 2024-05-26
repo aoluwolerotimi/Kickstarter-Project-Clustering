@@ -1,4 +1,4 @@
-_Note: Folders with suffix V2 are for the improved iteration of this project which is set to conclude in June 2024. All other content in this repo is for V1, which is sumarized below._
+_Note: An improved iteration of this project is in progress, set to conclude in June 2024 . The below summary is for the first iteration._
 
 # Identifying Fundraising Project Profiles through Clustering
 
