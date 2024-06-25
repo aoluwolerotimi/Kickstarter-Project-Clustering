@@ -16,8 +16,8 @@ def cleaning_pipeline(data: pd.DataFrame):
     """
     Initial data QA pipeline. Saves processed file as Excel document in current directory
 
-    Args:
-        data (pd.DataFrame): input dataset for preprocessing
+    Args:s
+    - data (pd.DataFrame): input dataset for preprocessing
 
     """
     try: 
