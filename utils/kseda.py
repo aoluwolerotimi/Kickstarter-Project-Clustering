@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
-def plot_histograms(df, columns, n_cols, n_rows=None, bins=None):
+def plot_histograms(df, columns, n_cols, n_rows=None, bins='auto'):
     """
     Create histogram subplots for specified columns in a DataFrame.
 
@@ -43,6 +43,17 @@ def plot_histograms(df, columns, n_cols, n_rows=None, bins=None):
 
     axes = axes.flatten() if n_rows > 1 else np.array([axes])  # Ensure axes is always iterable
 
+    # for i, col in enumerate(columns):
+    #     ax = axes[i]
+    #     # Handle automatic binning if bins is None
+    #     if bins is None or bins == 'auto':
+    #         sns.histplot(df[col], kde=True, ax=ax, bins='auto')
+    #     else:
+    #         sns.histplot(df[col], kde=True, ax=ax, bins=bins)
+    #     ax.set_title(f'Distribution of {col}')
+    #     ax.set_xlabel(col)
+    #     ax.set_ylabel('Frequency')
+
     for i, col in enumerate(columns):
         ax = axes[i]
         sns.histplot(df[col], kde=True, ax=ax, bins=bins)
@@ -60,8 +71,6 @@ def plot_histograms(df, columns, n_cols, n_rows=None, bins=None):
     return fig, axes
 
 # Example usage:
-# Assuming `df` is your DataFrame and `filteredcols` or `fundingcols` are lists of columns
-# Replace with actual data and column names as per your use case
 
 # Example 1: Automatic layout and bins
 # fig, axes = plot_histograms(df, filteredcols)
