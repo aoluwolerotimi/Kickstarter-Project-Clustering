@@ -3,7 +3,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
-def plot_histograms(df, columns, n_cols, n_rows=None, bins='auto'):
+
+# def plot_histograms(df, columns, n_cols, n_rows=None, bins='auto')
+    
+def plot_histograms(df, columns, n_cols, n_rows=None, kde=False, bins='auto'):
     """
     Create histogram subplots for specified columns in a DataFrame.
 
@@ -16,6 +19,8 @@ def plot_histograms(df, columns, n_cols, n_rows=None, bins='auto'):
         Number of rows for subplot layout. Default is calculated based on len(columns).
     - n_cols: int, optional
         Number of columns for subplot layout. Default is 2.
+    - kde: bool, optional
+        Whether a KDE plots should be included. Default is False
     - bins: int, optional
         Number of bins for the histograms. Default is None (automatic binning).
 
@@ -45,21 +50,23 @@ def plot_histograms(df, columns, n_cols, n_rows=None, bins='auto'):
 
     # for i, col in enumerate(columns):
     #     ax = axes[i]
-    #     # Handle automatic binning if bins is None
-    #     if bins is None or bins == 'auto':
-    #         sns.histplot(df[col], kde=True, ax=ax, bins='auto')
-    #     else:
-    #         sns.histplot(df[col], kde=True, ax=ax, bins=bins)
+    #     sns.histplot(df[col], kde=kde, ax=ax, bins=bins)
+    #     # sns.histplot(df[col], kde=True, ax=ax, bins=bins)
     #     ax.set_title(f'Distribution of {col}')
     #     ax.set_xlabel(col)
     #     ax.set_ylabel('Frequency')
-
+    
     for i, col in enumerate(columns):
-        ax = axes[i]
-        sns.histplot(df[col], kde=True, ax=ax, bins=bins)
-        ax.set_title(f'Distribution of {col}')
-        ax.set_xlabel(col)
-        ax.set_ylabel('Frequency')
+        sns.histplot(df[col], kde=kde, ax=axes[i], bins=bins)
+        axes[i].set_title(f'Distribution of {col}')
+        axes[i].set_xlabel(col)
+        axes[i].set_ylabel('Frequency')
+
+    # for i, col in enumerate(fundingcols):
+    # sns.histplot(df[col], kde=False, ax=axes[i], bins=10) # manualy setting numner of bins. Make this an optional argument in my custom function
+    # axes[i].set_title(f'Distribution of {col}')
+    # axes[i].set_xlabel(col)
+    # axes[i].set_ylabel('Frequency')
 
     # Remove any unused subplots
     for j in range(len(columns), len(axes)):
