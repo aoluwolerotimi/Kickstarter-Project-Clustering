@@ -46,27 +46,13 @@ def plot_histograms(df, columns, n_cols, n_rows=None, kde=False, bins='auto'):
 
     fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 5 * n_rows))
 
-    axes = axes.flatten() if n_rows > 1 else np.array([axes])  # Ensure axes is always iterable
-
-    # for i, col in enumerate(columns):
-    #     ax = axes[i]
-    #     sns.histplot(df[col], kde=kde, ax=ax, bins=bins)
-    #     # sns.histplot(df[col], kde=True, ax=ax, bins=bins)
-    #     ax.set_title(f'Distribution of {col}')
-    #     ax.set_xlabel(col)
-    #     ax.set_ylabel('Frequency')
+    axes = axes.flatten() if n_rows > 1 else np.array(axes).flatten()  # Ensure axes is always iterable
     
     for i, col in enumerate(columns):
         sns.histplot(df[col], kde=kde, ax=axes[i], bins=bins)
         axes[i].set_title(f'Distribution of {col}')
         axes[i].set_xlabel(col)
         axes[i].set_ylabel('Frequency')
-
-    # for i, col in enumerate(fundingcols):
-    # sns.histplot(df[col], kde=False, ax=axes[i], bins=10) # manualy setting numner of bins. Make this an optional argument in my custom function
-    # axes[i].set_title(f'Distribution of {col}')
-    # axes[i].set_xlabel(col)
-    # axes[i].set_ylabel('Frequency')
 
     # Remove any unused subplots
     for j in range(len(columns), len(axes)):
@@ -76,14 +62,3 @@ def plot_histograms(df, columns, n_cols, n_rows=None, kde=False, bins='auto'):
     plt.tight_layout()
 
     return fig, axes
-
-# Example usage:
-
-# Example 1: Automatic layout and bins
-# fig, axes = plot_histograms(df, filteredcols)
-
-# Example 2: Specifying layout and bins
-# fig, axes = plot_histograms(df, fundingcols, n_cols=3, bins=10)
-
-# Show the plots
-# plt.show()
