@@ -211,3 +211,66 @@ def plot_IQRhistograms(df, columns, n_cols, n_rows=None, kde=False, bins='auto')
     plt.tight_layout()
 
     return fig, axes
+
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+
+def plot_freq_dist(df, columns, n_cols, n_rows=None):
+    """
+    Create frequency distribution subplots for specified categorical columns in a DataFrame.
+
+    Args:
+    - df: pandas DataFrame
+        The DataFrame containing the fields to plot.
+    - columns: list
+        List of categorical column names in df for which frequency distributions are to be plotted.
+    - n_cols: int
+        Number of columns for subplot layout.
+    - n_rows: int, optional
+        Number of rows for subplot layout. Default is calculated based on len(columns).
+
+    Returns:
+    - fig, axes: matplotlib Figure and Axes objects
+        A figure with frequency distribution subplots for each provided column.
+    """
+    # Validate input DataFrame and columns
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError("Input 'df' must be a pandas DataFrame.")
+
+    if not isinstance(columns, list):
+        raise TypeError("Input 'columns' must be a list of column names.")
+
+    # Validate existence of columns in DataFrame
+    invalid_columns = [col for col in columns if col not in df.columns]
+    if invalid_columns:
+        raise ValueError(f"The following columns do not exist in the DataFrame: {', '.join(invalid_columns)}")
+
+    # Calculate number of rows if not provided
+    if n_rows is None:
+        n_rows = (len(columns) + n_cols - 1) // n_cols
+   
+    # Initialize figure and axes
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(15, 5 * n_rows))
+
+    # Ensure axes always iterable
+    axes = axes.flatten() if n_rows > 1 else np.array(axes).flatten()  
+
+    # Plotting each column's frequency distribution
+    for i, col in enumerate(columns):
+        sns.countplot(data=df, x=col, ax=axes[i])
+        axes[i].set_title(f'Frequency Distribution of {col}')
+        axes[i].set_xlabel(col)
+        axes[i].set_ylabel('Frequency')
+        axes[i].tick_params(axis='x', rotation=45)  # Rotate labels for readability
+
+    # Remove unused subplots
+    for j in range(len(columns), len(axes)):
+        fig.delaxes(axes[j])
+
+    # Adjust layout to prevent overlap
+    plt.tight_layout()
+
+    return fig, axes
