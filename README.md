@@ -1,4 +1,4 @@
-_Note: An improved iteration of this project is in progress, set to conclude in July 2024 . The below summary is for the first iteration._
+_Note: An improved iteration of this project is in progress, set to conclude in July 2024. The below summary is for the first iteration._
 
 # Identifying Fundraising Project Profiles through Clustering
 
