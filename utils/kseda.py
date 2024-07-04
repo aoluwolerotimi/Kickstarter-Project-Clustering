@@ -270,25 +270,20 @@ def plot_freq_dist(df, columns, n_cols, n_rows=None):
 
 
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
-import pandas as pd
-
-def plot_cathistograms(df, plot_col, category_col=None, categories_list=None, kde=False, bins='auto'):
+def plot_cathistograms(df, plot_col, category_col, categories_list=None, kde=False, bins='auto'):
     """
-    Create histogram subplots for a specified column in a DataFrame, categorized by a given column or a predefined list of categories,
-    with a dynamic subplot layout based on the number of categories.
+    Create histogram subplots for a specified column in a DataFrame, categorized by a given column,
+    potentially using a predefined list of categories for filtering.
 
     Args:
     - df: pandas DataFrame
         The DataFrame containing the fields to plot.
     - plot_col: str
         The column name in df for which histograms are to be plotted for each category.
-    - category_col: str, optional
-        The column name for which to derive categories. Either category_col or categories_list must be provided, not both.
+    - category_col: str
+        The column name for which to derive or match categories.
     - categories_list: list, optional
-        A predefined list of categories. Either category_col or categories_list must be provided, not both.
+        A predefined list of categories. If provided, it overrides the unique values derived from category_col.
     - kde: bool, optional
         Whether a KDE plot should be included. Default is False.
     - bins: str or int, optional
@@ -296,7 +291,7 @@ def plot_cathistograms(df, plot_col, category_col=None, categories_list=None, kd
 
     Returns:
     - fig, axes: matplotlib Figure and Axes objects
-        A figure with histogram subplots for each category derived from category_col or categories_list
+        A figure with histogram subplots for each category derived from category_col or matched to categories_list
     """
     # Validate inputs
     if not isinstance(df, pd.DataFrame):
@@ -304,19 +299,16 @@ def plot_cathistograms(df, plot_col, category_col=None, categories_list=None, kd
     if not isinstance(plot_col, str):
         raise TypeError("Input 'plot_col' must be a string representing the column name.")
     if not isinstance(category_col, str):
-        raise TypeError("Input 'category_col' must be a string representing the column name.")
-    if category_col is None and categories_list is None:
-        raise ValueError("Either 'category_col' or 'categories_list' must be provided.")
-    if category_col is not None and categories_list is not None:
-        raise ValueError("Only one of 'category_col' or 'categories_list' should be provided, not both.")
-    if category_col and category_col not in df.columns:
-        raise ValueError(f"The category column '{category_col}' does not exist in the DataFrame.")
+        raise ValueError("Input 'category_col' must be a string representing the column name.")
+    if category_col not in df.columns or plot_col not in df.columns:
+        missing_cols = [col for col in [category_col, plot_col] if col not in df.columns]
+        raise ValueError(f"The following columns do not exist in the DataFrame: {', '.join(missing_cols)}")
     
     # Determine categories based on input
-    if category_col:
-        categories = df[category_col].unique()
-    else:
+    if categories_list is not None:
         categories = categories_list
+    else:
+        categories = df[category_col].unique()
 
     # Determine the layout of the subplots
     if len(categories) <= 4:
@@ -327,18 +319,15 @@ def plot_cathistograms(df, plot_col, category_col=None, categories_list=None, kd
         n_rows = (len(categories) + n_cols - 1) // n_cols  # Calculate rows needed
 
     # Initialize figure and axes
-    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 5 * n_rows), sharex=True, sharey=True)
-    axes = axes.flatten() if n_rows > 1 else np.array(axes).flatten() 
+    fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 5 * n_rows), sharex=True, sharey=False)
+    axes = axes.flatten() if n_rows > 1 else np.array(axes).flatten()
 
     # Color palette
     colors = sns.color_palette('viridis', n_colors=len(categories))
 
     # Plot each category
     for idx, category in enumerate(categories):
-        if category_col:
-            category_data = df[df[category_col] == category]
-        else:
-            category_data = df[df[plot_col].isin([category])]  # Filter data for the current category
+        category_data = df[df[category_col] == category]
         sns.histplot(category_data[plot_col], kde=kde, ax=axes[idx], bins=bins, color=colors[idx])
         axes[idx].set_title(f'{category}: Distribution of {plot_col}')
         axes[idx].set_xlabel(plot_col)
@@ -354,18 +343,22 @@ def plot_cathistograms(df, plot_col, category_col=None, categories_list=None, kd
     return fig, axes
 
 
-# def plot_cathistograms(df, category_col, plot_col, kde=False, bins='auto'):
+
+
+# def plot_cathistograms(df, plot_col, category_col=None, categories_list=None, kde=False, bins='auto'):
 #     """
-#     Create histogram subplots for a specified column in a DataFrame, categorized by a given column,
+#     Create histogram subplots for a specified column in a DataFrame, categorized by a given column or a predefined list of categories,
 #     with a dynamic subplot layout based on the number of categories.
 
 #     Args:
 #     - df: pandas DataFrame
 #         The DataFrame containing the fields to plot.
-#     - category_col: str
-#         The column name for which to derive categories.
 #     - plot_col: str
 #         The column name in df for which histograms are to be plotted for each category.
+#     - category_col: str, optional
+#         The column name for which to derive categories. Either category_col or categories_list must be provided, not both.
+#     - categories_list: list, optional
+#         A predefined list of categories. Either category_col or categories_list must be provided, not both.
 #     - kde: bool, optional
 #         Whether a KDE plot should be included. Default is False.
 #     - bins: str or int, optional
@@ -373,7 +366,7 @@ def plot_cathistograms(df, plot_col, category_col=None, categories_list=None, kd
 
 #     Returns:
 #     - fig, axes: matplotlib Figure and Axes objects
-#         A figure with histogram subplots for each category derived from category_col
+#         A figure with histogram subplots for each category derived from category_col or categories_list
 #     """
 #     # Validate inputs
 #     if not isinstance(df, pd.DataFrame):
@@ -382,13 +375,19 @@ def plot_cathistograms(df, plot_col, category_col=None, categories_list=None, kd
 #         raise TypeError("Input 'plot_col' must be a string representing the column name.")
 #     if not isinstance(category_col, str):
 #         raise TypeError("Input 'category_col' must be a string representing the column name.")
-#     if category_col not in df.columns or plot_col not in df.columns:
-#         missing_cols = [col for col in [category_col, plot_col] if col not in df.columns]
-#         raise ValueError(f"The following columns do not exist in the DataFrame: {', '.join(missing_cols)}")
+#     if category_col is None and categories_list is None:
+#         raise ValueError("Either 'category_col' or 'categories_list' must be provided.")
+#     if category_col is not None and categories_list is not None:
+#         raise ValueError("Only one of 'category_col' or 'categories_list' should be provided, not both.")
+#     if category_col and category_col not in df.columns:
+#         raise ValueError(f"The category column '{category_col}' does not exist in the DataFrame.")
     
-#     # Get unique categories
-#     categories = df[category_col].unique()
-    
+#     # Determine categories based on input
+#     if category_col:
+#         categories = df[category_col].unique()
+#     else:
+#         categories = categories_list
+
 #     # Determine the layout of the subplots
 #     if len(categories) <= 4:
 #         n_cols = len(categories)
@@ -399,14 +398,17 @@ def plot_cathistograms(df, plot_col, category_col=None, categories_list=None, kd
 
 #     # Initialize figure and axes
 #     fig, axes = plt.subplots(n_rows, n_cols, figsize=(5 * n_cols, 5 * n_rows), sharex=True, sharey=True)
-#     axes = axes.flatten()
+#     axes = axes.flatten() if n_rows > 1 else np.array(axes).flatten() 
 
 #     # Color palette
 #     colors = sns.color_palette('viridis', n_colors=len(categories))
 
 #     # Plot each category
 #     for idx, category in enumerate(categories):
-#         category_data = df[df[category_col] == category]
+#         if category_col:
+#             category_data = df[df[category_col] == category]
+#         else:
+#             category_data = df[df[plot_col].isin([category])]  # Filter data for the current category
 #         sns.histplot(category_data[plot_col], kde=kde, ax=axes[idx], bins=bins, color=colors[idx])
 #         axes[idx].set_title(f'{category}: Distribution of {plot_col}')
 #         axes[idx].set_xlabel(plot_col)
