@@ -1,5 +1,3 @@
-_Note: An improved iteration of this project is in progress, set to conclude in August 2024. The below summary is for the first iteration._
-
 # Identifying Fundraising Project Profiles through Clustering
 
 In this descriptive analytics project, I've leveraged kprototypes - an algorithm that incorporates both numerical and categorical data - to form clusters representing different profiles of projects. 
